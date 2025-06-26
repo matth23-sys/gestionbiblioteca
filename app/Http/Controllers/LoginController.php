@@ -31,7 +31,7 @@ class LoginController extends Controller
     $user->password = Hash::make($request->password);
     $user->save();
 
-    if ($someConditionFails) {
+ if (!$user->wasRecentlyCreated) {
     return redirect()->back()->with('error', 'No se pudo completar el registro');
 }
 
