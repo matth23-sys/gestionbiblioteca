@@ -21,39 +21,73 @@ class LibrosController extends Controller
         return view('libro.leer', compact('libros'));
     }
 
+public function store(Request $request)
+{
+    $request->validate([
+        'titulo' => 'required|string|max:255',
+        'autor' => 'required|string|max:255',
+        'isbn' => 'required|string|max:100|unique:libros',
+        'categoria' => 'required|string|max:100',
+        'numero_ejemplares' => 'required|integer|min:1',
+        'imagen' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
 
+    $libro = new Libro();
+    $libro->titulo = $request->titulo;
+    $libro->autor = $request->autor;
+    $libro->isbn = $request->isbn;
+    $libro->categoria = $request->categoria;
+    $libro->numero_ejemplares = $request->numero_ejemplares;
 
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'titulo' => 'required|string|max:255',
-            'autor' => 'required|string|max:255',
-            'isbn' => 'required|string|max:100|unique:libros',
-            'categoria' => 'required|string|max:100',
-            'numero_ejemplares' => 'required|integer|min:1',
-            'imagen' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
-
-        $libro = new Libro();
-        $libro->titulo = $request->titulo;
-        $libro->autor = $request->autor;
-        $libro->isbn = $request->isbn;
-        $libro->categoria = $request->categoria;
-        $libro->numero_ejemplares = $request->numero_ejemplares;
-
-        if ($request->hasFile('imagen')) {
-            $path = $request->file('imagen')->store('portadas', 'public');
-            $libro->imagen = $path;
-        }
-
-        $libro->save();
-
-        return redirect()->back()->with('success', 'Libro registrado correctamente.');
+    if ($request->hasFile('imagen')) {
+        // Guardar imagen en storage/app/public/portadas
+        $path = $request->file('imagen')->store('portadas', 'public');
+        $libro->imagen = $path;
     }
 
+    $libro->save();
+
+    return redirect()->back()->with('success', 'Libro registrado correctamente.');
+}
 
 
+ 
+public function update(Request $request, $id)
+{
+    $libro = Libro::findOrFail($id);
+
+    $request->validate([
+        'titulo' => 'required|string|max:255',
+        'autor' => 'required|string|max:255',
+        'isbn' => 'required|string|max:100|unique:libros,isbn,' . $libro->id,
+        'categoria' => 'required|string|max:100',
+        'numero_ejemplares' => 'required|integer|min:1',
+        'imagen' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    // Actualizar datos del libro
+    $libro->titulo = $request->titulo;
+    $libro->autor = $request->autor;
+    $libro->isbn = $request->isbn;
+    $libro->categoria = $request->categoria;
+    $libro->numero_ejemplares = $request->numero_ejemplares;
+
+    // Si hay una imagen nueva, se elimina la anterior y se guarda la nueva
+    if ($request->hasFile('imagen')) {
+        // Eliminar imagen anterior si existe
+        if ($libro->imagen) {
+            Storage::disk('public')->delete($libro->imagen);
+        }
+        // Guardar la nueva imagen y asignar ruta
+        $path = $request->file('imagen')->store('portadas', 'public');
+        $libro->imagen = $path;
+    }
+
+    $libro->save();
+
+    return redirect()->back()->with('success', 'Libro actualizado correctamente.');
+}
+/*
     public function update(Request $request, Libro $libro)
     {
         $request->validate([
@@ -84,7 +118,7 @@ class LibrosController extends Controller
     }
 
 
-
+*/
     public function eliminar()
     {
         $libros = Libro::all();

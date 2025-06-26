@@ -8,7 +8,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="{{ route('libros.update', $libro) }}">
+        <form method="POST" action="{{ route('libros.update', $libro) }}" enctype="multipart/form-data">
+    
     @csrf
     @method("PUT")
 
@@ -37,15 +38,21 @@
         <input type="number" id="numero_ejemplares" name="numero_ejemplares" value="{{ $libro->numero_ejemplares }}" class="form-control" required>
     </div>
 
-    <div class="form-group mb-4">
-        <label for="imagen">Portada del libro:</label>
+<div class="form-group mb-3">
+        <label for="imagen">Portada actual:</label><br>
         @if ($libro->imagen)
-            <div class="mb-2">
-                <img src="{{ asset('storage/' . $libro->imagen) }}" width="80">
-            </div>
+            <img src="{{ asset('storage/' . $libro->imagen) }}" alt="Portada" width="80" class="mb-2">
+        @else
+            <p class="text-muted">Sin imagen</p>
         @endif
-        <input type="file" id="imagen" name="imagen" class="form-control">
+        <input type="file" name="imagen" id="imagen" class="form-control mt-2" accept="image/*">
     </div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+        </div>
 
     <button type="submit" class="btn btn-primary">Actualizar libro</button>
 </form>

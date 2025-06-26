@@ -33,7 +33,7 @@
 
     <div class="form-group mb-4">
         <label for="imagen">Portada del libro:</label>
-        <input type="file" id="imagen" name="imagen" class="form-control">
+        <input type="file" id="imagen" name="imagen" class="form-control" accept="image/*">
     </div>
 
     <button type="submit" class="btn btn-primary">Guardar libro</button>

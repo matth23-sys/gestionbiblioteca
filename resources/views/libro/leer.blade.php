@@ -20,21 +20,22 @@
         <tbody>
             @forelse ($libros as $libro)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $libro->id }}</td>
                     <td>{{ $libro->titulo }}</td>
                     <td>{{ $libro->autor }}</td>
                     <td>{{ $libro->isbn }}</td>
                     <td>{{ $libro->categoria }}</td>
                     <td>{{ $libro->numero_ejemplares }}</td>
+<td>
+    @if ($libro->imagen)
+        <img src="{{ asset('storage/' . $libro->imagen) }}" alt="Portada" width="60">
+    @else
+        <span class="text-muted">Sin imagen</span>
+    @endif
+</td>
+
                     <td>
-                        @if ($libro->imagen)
-                            <img src="{{ asset('storage/' . $libro->imagen) }}" alt="Portada" width="60">
-                        @else
-                            <span class="text-muted">Sin imagen</span>
-                        @endif
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal{{ $libro->id }}">
+                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal{{ $libro->id }}">
                             Actualizar
                         </button>
                         @include('libro.actualizar', ['libro' => $libro])
@@ -49,7 +50,7 @@
     </table>
 
     @if (session('success'))
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success mt-4" role="alert">
             {{ session('success') }}
         </div>
     @endif
