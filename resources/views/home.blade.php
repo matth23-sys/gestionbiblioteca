@@ -625,129 +625,17 @@
                 </div>
             </div>
         </div>
-        <!-- Portfolio item 4 modal popup-->
-        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('assets/img/close-icon.svg') }}" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project details-->
-                                    <h2 class="text-uppercase">Don Quijote de la Mancha</h2>
-                                    <p class="item-intro text-muted">El caballero que confunde molinos con gigantes y sueños con realidad.</p>
-                                    <img class="img-fluid d-block mx-auto" src="{{ asset('assets/img/portfolio/p4.jpg') }}" alt="..." />
-                                    <p>Don Quijote, un hidalgo español influenciado por libros de caballería, decide convertirse en caballero andante y recorrer el mundo en busca de justicia. Con su fiel escudero Sancho Panza, vive aventuras tan absurdas como profundas, que cuestionan la locura, la realidad y la nobleza del idealismo.</p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <strong>Genero:</strong>
-                                            Novela / Clásico
-                                        </li>
-                                        <li>
-                                            <strong>🔖 Temas:</strong>
-                                            Honor, locura, crítica social
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                        <i class="fas fa-xmark me-1"></i>
-                                        Close Project
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-md-4">
+          <div class="card shadow-sm mb-4">
+            <div class="card-body">
+              <h5 class="card-title">Módulo 3</h5>
+              <p class="card-text">Contenido adicional que quieras mostrar.</p>
             </div>
+          </div>
         </div>
-        <!-- Portfolio item 5 modal popup-->
-        <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('assets/img/close-icon.svg') }}" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project details-->
-                                    <h2 class="text-uppercase">El Principito</h2>
-                                    <p class="item-intro text-muted">Una fábula poética sobre lo esencial, vista desde los ojos de un niño.</p>
-                                    <img class="img-fluid d-block mx-auto" src="{{ asset('assets/img/portfolio/p5.jpg') }}" alt="..." />
-                                    <pEl Principito llega desde un pequeño planeta y narra sus encuentros con diversos personajes, cada uno con enseñanzas sobre la vida adulta. A través de su mirada pura y honesta, el autor nos recuerda que lo esencial es invisible a los ojos, y que las cosas más importantes solo se entienden con el corazón.</p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <strong>Genero::</strong>
-                                            Fábula / Filosófico
-                                        </li>
-                                        <li>
-                                            <strong>🔖 Temas:</strong>
-                                            Amor, niñez, sabiduría interior
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                        <i class="fas fa-xmark me-1"></i>
-                                        Close Project
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Portfolio item 6 modal popup-->
-        <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('assets/img/close-icon.svg') }}" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project details-->
-                                    <h2 class="text-uppercase">Rayuela</h2>
-                                    <p class="item-intro text-muted">Una novela que desafía las reglas y deja que el lector decida el orden.</p>
-                                    <img class="img-fluid d-block mx-auto" src="{{ asset('assets/img/portfolio/p6.jpg') }}" alt="..." />
-                                    <p>Rayuela sigue la vida del intelectual Horacio Oliveira entre París y Buenos Aires, mientras reflexiona sobre el amor, la muerte, el arte y la existencia. Su estructura no lineal permite múltiples lecturas, invitando al lector a ser parte activa de una obra profundamente filosófica y experimental.</p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <strong>Genero:</strong>
-                                            Novela / Vanguardia
-                                        </li>
-                                        <li>
-                                            <strong>🔖 Temas:</strong>
-                                            Existencialismo, amor, arte
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                        <i class="fas fa-xmark me-1"></i>
-                                        Close Project
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="{{ asset('js/scripts.js') }}"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+      </div>
 
-
-<a href="https://wa.me/593999999999" 
-   target="_blank" 
-   style="position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 15px 20px; border-radius: 50px; text-decoration: none; font-size: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); z-index: 999; display: flex; align-items: center; gap: 10px;">
-  <i class="fab fa-whatsapp" style="font-size: 20px;"></i> ¿Necesitas ayuda?
-</a>
-
-
-
-    </body>
+    </div>
+  </div>
+</body>
 </html>

@@ -21,4 +21,10 @@ class Libro extends Model
     ];
 
     public $timestamps = false;
+
+    public function ejemplares()
+{
+    return $this->hasMany(Ejemplar::class);
+}
+
 }
