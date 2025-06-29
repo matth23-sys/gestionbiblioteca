@@ -11,39 +11,36 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     // Registro de usuario
-   public function register(Request $request)
-{
-    // Validar los datos
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-       'password' => 'required|string|min:6|confirmed',
-    ], [
-        'email.unique' => 'El correo ya está registrado.',
-        'password.confirmed' => 'Las contraseñas no coinciden.',
-        'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
-    ]);
+    public function register(Request $request)
+    {
+        // Validar los datos
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6|confirmed',
+        ], [
+            'email.unique' => 'El correo ya está registrado.',
+            'password.confirmed' => 'Las contraseñas no coinciden.',
+            'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
+        ]);
 
-    // Crear nuevo usuario
-    $user = new User();
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->password = Hash::make($request->password);
-    $user->save();
+        // Crear nuevo usuario
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
 
- if (!$user->wasRecentlyCreated) {
-    return redirect()->back()->with('error', 'No se pudo completar el registro');
-}
+        if (!$user->wasRecentlyCreated) {
+            return redirect()->back()->with('error', 'No se pudo completar el registro');
+        }
 
+        // Iniciar sesión automáticamente
+        Auth::login($user);
 
-
-    // Iniciar sesión automáticamente
-    Auth::login($user);
-
-    // Redirigir a ruta home
-    return redirect(route('home'));
-}
-
+        // Redirigir a ruta home
+        return redirect(route('home'));
+    }
 
     public function login(Request $request)
     {
@@ -60,9 +57,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('home');
         } else {
-          return redirect()->back()->with('error', 'Usuario no encontrado o credenciales incorrectas');
-
-            
+            return redirect()->back()->with('error', 'Usuario no encontrado o credenciales incorrectas');
         }
     }
 
@@ -73,6 +68,6 @@ class LoginController extends Controller
         $request->session()->invalidate(); // Invalida la sesión
         $request->session()->regenerateToken(); // Regenera token CSRF
 
-        return redirect(route('login')); // Redirige al login
+        return redirect()->route('home'); // ✅ Corrección aquí
     }
 }
