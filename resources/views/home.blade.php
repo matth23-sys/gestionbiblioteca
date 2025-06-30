@@ -540,7 +540,7 @@
                                             Fantasía / Literatura infantil / Aventura surrealista
                                         </li>
                                         <li>
-                                            <strong>🔖 Temas:</strong>
+                                            <strong> Temas:</strong>
                                             Imaginación, identidad, lógica, crecimiento personal
                                         </li>
                                     </ul>
@@ -575,7 +575,7 @@
                                             Novela / Realismo mágico
                                         </li>
                                         <li>
-                                            <strong>🔖 Temas:</strong>
+                                            <strong> Temas:</strong>
                                             Soledad, historia familiar, mitología latinoamericana
                                         </li>
                                     </ul>
@@ -625,13 +625,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-          <div class="card shadow-sm mb-4">
-            <div class="card-body">
-              <h5 class="card-title">Módulo 3</h5>
-              <p class="card-text">Contenido adicional que quieras mostrar.</p>
-            </div>
-          </div>
+
         </div>
       </div>
 
