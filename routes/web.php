@@ -17,7 +17,7 @@ use App\Http\Controllers\EjemplaresController;
 */
 
 Route::get('/', function () {return view('welcome');});
-Route::get('/home', function () {return view('home');});
+
 // Vistas
 Route::view('/login', 'login')->name("login");
 Route::view('/registro', 'register')->name("registro");
@@ -40,7 +40,7 @@ Route::get("/libros/leer", [LibrosController::class, "leer"])->name("libros.leer
 Route::put("/libros/{libro}", [LibrosController::class, "update"])->name("libros.update")->middleware('auth');
 Route::get("/libros/eliminar", [LibrosController::class, "eliminar"])->name("libros.eliminar")->middleware('auth');
 Route::post("/libros/destroy", [LibrosController::class, "destroy"])->name("libros.destroy")->middleware('auth');
-*/
+
 //ejemplares 
 /*
 Route::middleware(['auth', 'rol:admin'])->group(function () {
@@ -71,6 +71,7 @@ Route::get("/ejemplares/leer", [EjemplaresController::class, "leer"])->name("eje
 Route::post("/ejemplares/{ejemplar}/estado", [EjemplaresController::class, "cambiarEstado"])->name("ejemplares.estado");
 Route::delete("/ejemplares/{ejemplar}", [EjemplaresController::class, "eliminar"])->name("ejemplares.eliminar");
 */ 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::middleware(['auth', 'rol.admin'])->group(function () {

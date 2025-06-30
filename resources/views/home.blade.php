@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-          <title>Gestion biblioteca</title>
+          <title>Laravel</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -43,22 +43,7 @@
                          <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">Nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="#busqueda">Buscar</a></li>
-@auth
-    @if(auth()->user()->rol === 'admin')
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Administrador
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown">
-                <li><a class="dropdown-item" href="{{ route('libros.leer') }}">Libros</a></li>
-                <li><a class="dropdown-item" href="{{ route('ejemplares.leer') }}">Ejemplares</a></li>
-            </ul>
-        </li>
-    @endif
-@endauth
-
-
-
+                        <li class="nav-item"><a class="nav-link" href="#contact">Ayudanos</a></li>
                         <li class="nav-item">
   <a class="nav-link" href="{{ url('/login') }}">Cerrar sesión</a></li>
 
@@ -73,16 +58,9 @@
             
                 <div class="masthead-subheading">Bienvenido a nuestro estudio!</div>
                 <div class="masthead-heading text-uppercase">descubre un mundo de conocimiento</div>
-               @auth
-    @if(auth()->user()->rol === 'admin')
-        <a class="btn btn-primary btn-xl text-uppercase" href="{{ route('libros.crear') }}">Gestionar Libros</a>
-    @endif
-@endauth
-               @auth
-    @if(auth()->user()->rol === 'admin')
-        <a class="btn btn-primary btn-xl text-uppercase" href="{{ route('ejemplares.crear') }}">Gestionar Ejemplares</a>
-    @endif
-@endauth
+                <a class="btn btn-primary btn-xl text-uppercase" href="{{ route('reservas') }}">Reserva tu libro</a>
+
+
 
             </div>
         </header>
@@ -108,7 +86,6 @@
                 Explora nuestro catálogo digital con información de algunos de nuestros libros
             </h3>
         </div>
-
         <div class="row">
             <div class="col-lg-4 col-sm-6 mb-4">
                 <!-- Portfolio item 1-->
@@ -222,109 +199,45 @@
 </style>
 
  
-<style>
-  .center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 0; /* Reducido (antes era 60px o 100vh) */
-    background: linear-gradient(to bottom, #eeeeee, #cccccc);
-  }
+<h2 class="mb-4">Listado de Libros</h2>
 
-  .form-container {
-    background: white;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    width: 80%;
-    max-width: 900px;
-    font-family: Arial, sans-serif;
-  }
-
-  .form-container h2 {
-    margin-top: 0;
-    color: #333;
-    font-size: 28px;
-  }
-
-  .tabs {
-    display: flex;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-  }
-
-  .tab {
-    padding: 12px 20px;
-    cursor: pointer;
-    border: none;
-    background: none;
-    font-weight: bold;
-    color: #555;
-    font-size: 16px;
-  }
-
-  .tab.active {
-    color: #007baf;
-    border-bottom: 3px solid #007baf;
-  }
-
-  .form-container select,
-  .form-container input[type="text"] {
-    width: 100%;
-    padding: 15px;
-    margin: 12px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-
-  .form-container button {
-    width: 150px;
-    padding: 14px;
-    background-color: #009cde;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .form-container button:hover {
-    background-color: #007bb2;
-  }
-
-  .subtitulo {
-    font-style: italic;
-    color: #444;
-    margin-bottom: 15px;
-    font-size: 15px;
-  }
-</style>
-
-<section class="page-section" id="busqueda">
-  <div class="center-container">
-    <div class="form-container">
-      <h2>Búsquedas</h2>
-      <div class="tabs">
-        <!--<button class="tab active">Colección impresa</button>-->
-      </div>
-
-      <div class="subtitulo">Búsqueda en la colección impresa</div>
-
-      <select>
-        <option>Catálogo de biblioteca</option>
-      </select>
-
-      <input type="text" placeholder="Término a buscar...">
-
-      <select>
-        <option>Todas las bibliotecas</option>
-      </select>
-
-      <button>Buscar</button>
-    </div>
-  </div>
-</section>
+<table class="table table-dark table-hover table-bordered align-middle text-center">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>ISBN</th>
+            <th>Categoría</th>
+            <th>Ejemplares</th>
+            <th>Portada</th>
+        </tr>
+    </thead>
+    <tbody>
+        @php $index = 1; @endphp
+        @forelse ($libros as $libro)
+            <tr>
+                <td>{{ $index++ }}</td>
+                <td>{{ $libro->titulo }}</td>
+                <td>{{ $libro->autor }}</td>
+                <td>{{ $libro->isbn }}</td>
+                <td>{{ $libro->categoria }}</td>
+                <td>{{ $libro->numero_ejemplares }}</td>
+                <td>
+                    @if ($libro->imagen)
+                        <img src="{{ asset('storage/' . $libro->imagen) }}" alt="Portada" width="50">
+                    @else
+                        Sin imagen
+                    @endif
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="7" class="text-center">No hay libros registrados.</td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
 
 
 
@@ -458,6 +371,73 @@
                 </div>
             </div>
         </section>
+
+
+       
+        <!-- Contact-->
+        <section class="page-section" id="contact">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Como podemos mejorar</h2>
+                    <h3 class="section-subheading text-muted">Dejanos un comentario contructivo para mejorar tu experiencia como usuario.</h3>
+                </div>
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- * * SB Forms Contact Form * *-->
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- This form is pre-integrated with SB Forms.-->
+                <!-- To make this form functional, sign up at-->
+                <!-- https://startbootstrap.com/solution/contact-forms-->
+                <!-- to get an API token!-->
+                <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                    <div class="row align-items-stretch mb-5">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <!-- Name input-->
+                                <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            </div>
+                            <div class="form-group">
+                                <!-- Email address input-->
+                                <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
+                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                            </div>
+                            <div class="form-group mb-md-0">
+                                <!-- Phone number input-->
+                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-textarea mb-md-0">
+                                <!-- Message input-->
+                                <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
+                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Submit success message-->
+                    <!---->
+                    <!-- This is what your users will see when the form-->
+                    <!-- has successfully submitted-->
+                    <div class="d-none" id="submitSuccessMessage">
+                        <div class="text-center text-white mb-3">
+                            <div class="fw-bolder">Form submission successful!</div>
+                            To activate this form, sign up at
+                            <br />
+                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                        </div>
+                    </div>
+                    <!-- Submit error message-->
+                    <!---->
+                    <!-- This is what your users will see when there is-->
+                    <!-- an error submitting the form-->
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                    <!-- Submit Button-->
+                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send Message</button></div>
+                </form>
+            </div>
+        </section>
         <!-- Footer-->
         <footer class="footer py-4">
             <div class="container">
@@ -480,7 +460,7 @@
         <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('assets/img/close-icon.svg') }}" alt="Close modal" /></div>
+                    
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
@@ -496,13 +476,13 @@
                                             Fantasía / Literatura infantil / Aventura surrealista
                                         </li>
                                         <li>
-                                            <strong> Temas:</strong>
+                                            <strong>🔖 Temas:</strong>
                                             Imaginación, identidad, lógica, crecimiento personal
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Close Project
+                                        Cerrar
                                     </button>
                                 </div>
                             </div>
@@ -515,7 +495,7 @@
         <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('assets/img/close-icon.svg') }}" alt="Close modal" /></div>
+                    
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
@@ -531,13 +511,13 @@
                                             Novela / Realismo mágico
                                         </li>
                                         <li>
-                                            <strong> Temas:</strong>
+                                            <strong>🔖 Temas:</strong>
                                             Soledad, historia familiar, mitología latinoamericana
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Close Project
+                                        Cerrar
                                     </button>
                                 </div>
                             </div>
@@ -550,7 +530,7 @@
         <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="{{ asset('assets/img/close-icon.svg') }}" alt="Close modal" /></div>
+
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
@@ -572,7 +552,7 @@
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                                         <i class="fas fa-xmark me-1"></i>
-                                        Close Project
+                                        Cerrar
                                     </button>
                                 </div>
                             </div>
@@ -581,13 +561,129 @@
                 </div>
             </div>
         </div>
-
+        <!-- Portfolio item 4 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                 
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">Don Quijote de la Mancha</h2>
+                                    <p class="item-intro text-muted">El caballero que confunde molinos con gigantes y sueños con realidad.</p>
+                                    <img class="img-fluid d-block mx-auto" src="{{ asset('assets/img/portfolio/p4.jpg') }}" alt="..." />
+                                    <p>Don Quijote, un hidalgo español influenciado por libros de caballería, decide convertirse en caballero andante y recorrer el mundo en busca de justicia. Con su fiel escudero Sancho Panza, vive aventuras tan absurdas como profundas, que cuestionan la locura, la realidad y la nobleza del idealismo.</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <strong>Genero:</strong>
+                                            Novela / Clásico
+                                        </li>
+                                        <li>
+                                            <strong>🔖 Temas:</strong>
+                                            Honor, locura, crítica social
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Cerrar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+        <!-- Portfolio item 5 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                  
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">El Principito</h2>
+                                    <p class="item-intro text-muted">Una fábula poética sobre lo esencial, vista desde los ojos de un niño.</p>
+                                    <img class="img-fluid d-block mx-auto" src="{{ asset('assets/img/portfolio/p5.jpg') }}" alt="..." />
+                                    <pEl Principito llega desde un pequeño planeta y narra sus encuentros con diversos personajes, cada uno con enseñanzas sobre la vida adulta. A través de su mirada pura y honesta, el autor nos recuerda que lo esencial es invisible a los ojos, y que las cosas más importantes solo se entienden con el corazón.</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <strong>Genero::</strong>
+                                            Fábula / Filosófico
+                                        </li>
+                                        <li>
+                                            <strong>🔖 Temas:</strong>
+                                            Amor, niñez, sabiduría interior
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Cerrar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio item 6 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                  
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">Rayuela</h2>
+                                    <p class="item-intro text-muted">Una novela que desafía las reglas y deja que el lector decida el orden.</p>
+                                    <img class="img-fluid d-block mx-auto" src="{{ asset('assets/img/portfolio/p6.jpg') }}" alt="..." />
+                                    <p>Rayuela sigue la vida del intelectual Horacio Oliveira entre París y Buenos Aires, mientras reflexiona sobre el amor, la muerte, el arte y la existencia. Su estructura no lineal permite múltiples lecturas, invitando al lector a ser parte activa de una obra profundamente filosófica y experimental.</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <strong>Genero:</strong>
+                                            Novela / Vanguardia
+                                        </li>
+                                        <li>
+                                            <strong>🔖 Temas:</strong>
+                                            Existencialismo, amor, arte
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-xmark me-1"></i>
+                                        Cerrar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{ asset('js/scripts.js') }}"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
-</body>
+<a href="https://wa.me/593999999999" 
+   target="_blank" 
+   style="position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 15px 20px; border-radius: 50px; text-decoration: none; font-size: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); z-index: 999; display: flex; align-items: center; gap: 10px;">
+  <i class="fab fa-whatsapp" style="font-size: 20px;"></i> ¿Necesitas ayuda?
+</a>
+
+
+
+    </body>
 </html>
