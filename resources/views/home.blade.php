@@ -42,7 +42,7 @@
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Catalago</a></li>
                          <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">Nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#busqueda">Buscar</a></li>
+                        
 @auth
     @if(auth()->user()->rol === 'admin')
         <li class="nav-item dropdown">

@@ -21,7 +21,7 @@
       margin: 0;
     }
 
-    /* Estilos para el formulario de reserva */
+    
     .reserva-container {
       max-width: 900px;
       margin: 0 auto;
@@ -87,7 +87,7 @@
         @endauth
       </h2>
 
-      <!-- ✅ Botón funcional de salir -->
+      
       <form method="POST" action="{{ route('logout') }}">
         @csrf
         <button type="submit" class="btn btn-danger">Salir</button>
@@ -95,7 +95,7 @@
     </div>
 
     
-      <!-- 🎯 Reserva de libros -->
+      
       <div class="reserva-container mt-5">
         <div class="reserva-header">
           <h2>Reserva de Libros</h2>

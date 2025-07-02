@@ -23,7 +23,6 @@ public function store(Request $request)
         'estado' => 'required|in:Disponible,Prestado,Dañado',
     ]);
 
-    // Verifica si ya hay suficientes ejemplares para ese libro
     $libro = Libro::find($request->libro_id);
     $ejemplaresActuales = $libro->ejemplares()->count();
 
@@ -31,7 +30,6 @@ public function store(Request $request)
         return back()->with('error', 'No se pueden agregar más ejemplares a este libro. Límite alcanzado.');
     }
 
-    // Crear ejemplar si el límite no se ha alcanzado
     Ejemplar::create([
         'libro_id' => $request->libro_id,
         'codigo' => $request->codigo,

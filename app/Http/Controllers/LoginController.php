@@ -10,10 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    // Registro de usuario
+
     public function register(Request $request)
     {
-        // Validar los datos
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
@@ -24,7 +23,6 @@ class LoginController extends Controller
             'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
         ]);
 
-        // Crear nuevo usuario
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -35,20 +33,18 @@ class LoginController extends Controller
             return redirect()->back()->with('error', 'No se pudo completar el registro');
         }
 
-        // Iniciar sesión automáticamente
         Auth::login($user);
 
-        // Redirigir a ruta home
         return redirect(route('home'));
     }
 
     public function login(Request $request)
     {
-        // Validación
+
         $credentials = [
             "email" => $request->email,
             "password" => $request->password,
-            //"active" => true
+
         ];
 
         $remember = ($request->has('remember') ? true : false);
@@ -61,13 +57,11 @@ class LoginController extends Controller
         }
     }
 
-    // Logout de usuario
     public function logout(Request $request)
     {
-        Auth::logout(); // Cierra la sesión
-        $request->session()->invalidate(); // Invalida la sesión
-        $request->session()->regenerateToken(); // Regenera token CSRF
-
-        return redirect()->route('home'); // ✅ Corrección aquí
+        Auth::logout(); 
+        $request->session()->invalidate(); 
+        $request->session()->regenerateToken(); 
+        return redirect()->route('home'); 
     }
 }

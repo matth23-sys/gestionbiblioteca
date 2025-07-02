@@ -37,12 +37,12 @@ class RolMiddleware
 {
     public function handle(Request $request, Closure $next, $rol = null)
     {
-        // Si el usuario no está autenticado, redirigir al login
+        
         if (!Auth::check()) {
             return redirect('/login');
         }
 
-        // Ya no se verifica el rol, se permite acceso a cualquier usuario autenticado
+       
         return $next($request);
     }
 }

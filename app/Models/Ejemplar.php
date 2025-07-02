@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ejemplar extends Model
 {
     use HasFactory;
-    protected $table = 'ejemplares'; // 👈 Asegura que use el nombre correcto
+    protected $table = 'ejemplares'; 
     protected $fillable = ['libro_id', 'codigo', 'estado'];
 
     public function libro()
